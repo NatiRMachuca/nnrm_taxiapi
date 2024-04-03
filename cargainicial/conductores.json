@@ -1,0 +1,152 @@
+[
+    {
+        "nombre": "Carolyn",
+        "apellidos": "Cannon",
+        "sexo": "F",
+        "celular": 9701716612,
+        "correo": "ochristian@example.org",
+        "ubicacion": {
+            "type": "Point",
+            "coordinates": [
+                -99.18984946680683,
+                19.329201430607625
+            ]
+        },
+        "estatus": "Disponible"
+    },
+    {
+        "nombre": "Tiffany",
+        "apellidos": "Gallegos",
+        "sexo": "M",
+        "celular": 7836760159,
+        "correo": "kjackson@example.org",
+        "ubicacion": {
+            "type": "Point",
+            "coordinates": [
+                -99.1891171883304,
+                19.322308153169928
+            ]
+        },
+        "estatus": "Disponible"
+    },
+    {
+        "nombre": "Rita",
+        "apellidos": "Barnes",
+        "sexo": "F",
+        "celular": 9868297723,
+        "correo": "matthew27@example.com",
+        "ubicacion": {
+            "type": "Point",
+            "coordinates": [
+                -99.1871462147314,
+                19.29423653030919
+            ]
+        },
+        "estatus": "Disponible"
+    },
+    {
+        "nombre": "Jennifer",
+        "apellidos": "Hester",
+        "sexo": "F",
+        "celular": 9376820718,
+        "correo": "johnnysmith@example.com",
+        "ubicacion": {
+            "type": "Point",
+            "coordinates": [
+                -99.19509500454676,
+                19.26766027582187
+            ]
+        },
+        "estatus": "Disponible"
+    },
+    {
+        "nombre": "Andrew",
+        "apellidos": "Murillo",
+        "sexo": "F",
+        "celular": 8633942448,
+        "correo": "smithmichael@example.org",
+        "ubicacion": {
+            "type": "Point",
+            "coordinates": [
+                -99.19511971828258,
+                19.262178934372038
+            ]
+        },
+        "estatus": "Disponible"
+    },
+    {
+        "nombre": "Andrea",
+        "apellidos": "Barton",
+        "sexo": "F",
+        "celular": 1312654330,
+        "correo": "gmccann@example.net",
+        "ubicacion": {
+            "type": "Point",
+            "coordinates": [
+                -99.19192239619336,
+                19.32818473440488
+            ]
+        },
+        "estatus": "Disponible"
+    },
+    {
+        "nombre": "Deborah",
+        "apellidos": "Robertson",
+        "sexo": "F",
+        "celular": 2194179797,
+        "correo": "brettsanchez@example.net",
+        "ubicacion": {
+            "type": "Point",
+            "coordinates": [
+                -99.18679165860723,
+                19.30165471311593
+            ]
+        },
+        "estatus": "Disponible"
+    },
+    {
+        "nombre": "Michael",
+        "apellidos": "Fleming",
+        "sexo": "M",
+        "celular": 1805150247,
+        "correo": "kwashington@example.com",
+        "ubicacion": {
+            "type": "Point",
+            "coordinates": [
+                -99.1908138007053,
+                19.335320899955526
+            ]
+        },
+        "estatus": "Disponible"
+    },
+    {
+        "nombre": "Emily",
+        "apellidos": "Krueger",
+        "sexo": "F",
+        "celular": 4678225725,
+        "correo": "cortezlauren@example.org",
+        "ubicacion": {
+            "type": "Point",
+            "coordinates": [
+                -99.19622454683774,
+                19.340216662936182
+            ]
+        },
+        "estatus": "Disponible"
+    },
+    {
+        "nombre": "Tonya",
+        "apellidos": "Potts",
+        "sexo": "F",
+        "celular": 9977064645,
+        "correo": "zvance@example.net",
+        "ubicacion": {
+            "type": "Point",
+            "coordinates": [
+                -99.18931949629705,
+                19.29165853243386
+            ]
+        },
+        "estatus": "Disponible"
+    }
+]

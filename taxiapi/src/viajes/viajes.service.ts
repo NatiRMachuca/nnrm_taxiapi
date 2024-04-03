@@ -17,7 +17,7 @@ export class ViajesService {
     }
 
     async crearViaje(createViaje: CrearViajeDto){
-      console.log(createViaje);
+      
       //validar que exista registrado el pasajero
       const uripasajeros = process.env.HOST+"pasajeros/"+createViaje.pasajero;
       console.log(uripasajeros);
@@ -39,13 +39,13 @@ export class ViajesService {
       if(existePasajero){
         //buscar los conductores mas cercanos
         const {latitud,longitud} =createViaje.puntoinicio;
-        const uriconductores=`${process.env.HOST}conductores?latitud=${latitud}&longitud=${longitud}&radio=3000`;
+        const uriconductores=`${process.env.HOST}conductores?estatus=Disponible&latitud=${latitud}&longitud=${longitud}&radio=3000`;
         console.log(uriconductores);
         let idconductor="";
         try {
           const response = await axios.get(uriconductores);
           if(response.status === 200){
-            console.log(response.data.lenght);
+
             if(response.data[0]!=null) {
               idconductor=response.data[0]._id;
             }
@@ -60,7 +60,7 @@ export class ViajesService {
         console.log("id conductor: ",idconductor);
         if(idconductor!="") {
           const uri = process.env.HOST+"viajes/";
-          console.log(uri);
+          console.log("crear viaje",uri);
 
           try {
             const response = await axios.post(uri,{...createViaje,conductor: idconductor});
@@ -79,7 +79,7 @@ export class ViajesService {
 
     async completarViaje(id: string){
       const uri = `${process.env.HOST}viajes/${id}`;
-      console.log("servicio",uri);
+      console.log("completar viaje",uri);
       try {
         const response = await axios.put(uri);
         if(response.status === 200){

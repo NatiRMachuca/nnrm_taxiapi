@@ -68,15 +68,28 @@ services:
         volumes:
             - mongo-viajes-vl:/data:/data/db  
         command: mongod --quiet --logpath /dev/null 
+    mongoimport:
+        image: mongo
+        container_name: my-import
+        volumes:
+            - ./cargainicial/:/src/data/
+        #command: "/bin/bash"
+        command: >
+            bash -c 
+            "mongoimport --host mongopasajeros --db pasajerosdb --collection pasajeros --type json --file /src/data/pasajeros.json --jsonArray
+            && mongoimport --host mongoconductores --db conductoresdb --collection conductors --type json --file /src/data/conductores.json --jsonArray
+            && echo hola"
     mongopasajeros:
         container_name: mongopasajeros
         image: mongo
         environment:
             MONGO_INITDB_DATABASE: pasajerosdb
         ports:
-            - '27018:27017'    
+            - '27018:27017'
+        depends_on:
+            - mongoimport    
         volumes:
-            - mongo-pasajeros-vl:/data:/data/db    
+            - mongo-pasajeros-vl:/data:/data/db   
         command: mongod --quiet --logpath /dev/null
     mongoconductores:
         container_name: mongoconductores
@@ -84,9 +97,11 @@ services:
         environment:
             MONGO_INITDB_DATABASE: conductoresdb
         ports:
-            - '27019:27017'    
+            - '27019:27017'
+        depends_on:
+            - mongoimport     
         volumes:
-            - mongo-conductores-vl:/data:/data/db    
+            - mongo-conductores-vl:/data:/data/MONGO_DB   
         command: mongod --quiet --logpath /dev/null 
     lb:
         image: haproxy

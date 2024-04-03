@@ -1,0 +1,30 @@
+[
+    {
+        "pasajero": "65f52cd0d5c1463439c9729a",
+        "conductor": "65f5470fa52dda852ddbac51",
+        "puntoinicio": {
+            "latitud": 19.299467804468016,
+            "longitud": -99.21234948709632
+        },
+        "puntofinal": {
+            "latitud": 19.304111101630596,
+            "longitud": -99.19022479532426
+        },
+        "estatus": "Completado",
+        "comentarios":"viaje completado buen servicio"
+    },
+    {
+        "pasajero": "65f52cd0d5c1463439c9729a",
+        "conductor": "65f5470fa52dda852ddbac51",
+        "puntoinicio": {
+            "latitud": 19.290192,
+            "longitud": -99.224134
+        },
+        "puntofinal": {
+            "latitud": 19.304111101630596,
+            "longitud": -99.19022479532426
+        },
+        "estatus": "Completado",
+        "comentarios":"viaje completado buen servicio"
+    }
+]
