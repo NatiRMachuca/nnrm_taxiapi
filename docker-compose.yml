@@ -1,0 +1,122 @@
+version : '3'
+
+services:
+    taxiapi:
+        container_name: taxiapi
+        restart: always
+        build: 
+            context: ./taxiapi/
+            dockerfile: Dockerfile
+        environment:
+            - HOST=http://lb:80/
+        volumes:
+            - ./taxiapi/src/:/home/node/app/src
+    viajesapp:
+        container_name: viajesapp
+        restart: always
+        build: 
+            context: ./viajes/
+            dockerfile: Dockerfile
+        external_links:
+            - mongo  
+        environment:
+            - APPID=1111
+            - MONGO_HOST=mongoviajes   
+            - MONGO_DB=viajesdb   
+            - MONGO_PORT=27017         
+            - NATS_HOST=nats-streaming-1         
+            - NATS_PORT=4222
+        volumes:
+            - ./viajes/src:/home/node/app/src                 
+    pasajerosapp:
+        container_name: pasajerosapp
+        restart: always
+        build:
+            context: ./pasajeros/
+            dockerfile: Dockerfile 
+        environment:
+            - APPID=2222
+            - MONGO_HOST=mongopasajeros   
+            - MONGO_DB=pasajerosdb   
+            - MONGO_PORT=27017   
+            - NATS_HOST=nats-streaming-1         
+            - NATS_PORT=4222
+        volumes:
+            - ./pasajeros/src:/home/node/app/src 
+    conductoresapp:
+        container_name: conductoresapp
+        restart: always
+        build:
+            context: ./conductores/
+            dockerfile: Dockerfile 
+        environment:
+            - APPID=3333
+            - MONGO_HOST=mongoconductores   
+            - MONGO_DB=conductoresdb   
+            - MONGO_PORT=27017   
+            - NATS_HOST=nats-streaming-1         
+            - NATS_PORT=4222
+        volumes:
+            - ./conductores/src:/home/node/app/src
+    mongoviajes:
+        container_name: mongoviajes
+        image: mongo
+        environment:
+            MONGO_INITDB_DATABASE: viajesdb
+        ports:
+            - '27017:27017'    
+        volumes:
+            - mongo-viajes-vl:/data:/data/db  
+        command: mongod --quiet --logpath /dev/null 
+    mongopasajeros:
+        container_name: mongopasajeros
+        image: mongo
+        environment:
+            MONGO_INITDB_DATABASE: pasajerosdb
+        ports:
+            - '27018:27017'    
+        volumes:
+            - mongo-pasajeros-vl:/data:/data/db    
+        command: mongod --quiet --logpath /dev/null
+    mongoconductores:
+        container_name: mongoconductores
+        image: mongo
+        environment:
+            MONGO_INITDB_DATABASE: conductoresdb
+        ports:
+            - '27019:27017'    
+        volumes:
+            - mongo-conductores-vl:/data:/data/db    
+        command: mongod --quiet --logpath /dev/null 
+    lb:
+        image: haproxy
+        ports:
+            - "8080:80"
+            - "8081:81"
+        volumes:
+            - ./haproxy:/usr/local/etc/haproxy        
+    nats-streaming-1:
+        command:
+            - "-p"
+            - "4222"
+            - "-m"
+            - '8222'
+            - "-hbi"
+            - "5s"
+            - "-hbt"
+            - "5s"
+            - "-hbf"
+            - '2'
+            - "-SD"
+            - "-cid"
+            - "nats_example"
+        image: "nats-streaming:0.17.0"
+        ports:
+            - "4222:4222"
+        volumes:
+            - "./nats-streaming-1:/data"
+
+volumes:
+    mongo-viajes-vl:
+    mongo-pasajeros-vl:
+    mongo-conductores-vl:

@@ -1,0 +1,3 @@
+node_modules/
+nats-streaming-1
+.env
