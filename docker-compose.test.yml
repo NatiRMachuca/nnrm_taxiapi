@@ -1,0 +1,29 @@
+version : '3'
+
+name: test-taxi-api
+
+services:
+    viajesapp_test:
+        container_name: viajesapp_test
+        build: 
+            context: ./viajes/
+            dockerfile: Dockerfile.test
+        volumes:
+            - ./viajes/src:/home/node/app/src                 
+            - ./viajes/test:/home/node/app/test
+    pasajerosapp_test:
+        container_name: pasajerosapp_test
+        build:
+            context: ./pasajeros/
+            dockerfile: Dockerfile.test
+        volumes:
+            - ./pasajeros/src:/home/node/app/src 
+            - ./pasajeros/test:/home/node/app/test
+    conductoresapp_test:
+        container_name: conductoresapp_test
+        build:
+            context: ./conductores/
+            dockerfile: Dockerfile.test
+        volumes:
+            - ./conductores/src:/home/node/app/src
+            - ./conductores/test:/home/node/app/test

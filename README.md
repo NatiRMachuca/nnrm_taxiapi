@@ -35,6 +35,20 @@ Para detener el proyecto
   docker-compose down
 ```
 
+## Test
+
+Para iniciar las pruebas
+
+```bash
+  docker-compose -f docker-compose.test.yml up
+```
+
+Para limpiar el proyecto de pruebas
+
+```bash
+  docker-compose -f docker-compose.test.yml rm
+```
+
 ## API Reference Microservicios Conductores
 
 #### Obtener todos los conductores
@@ -164,17 +178,17 @@ Recibe un objeto JSON
 
 ```JSON
 {
-    pasajero: "65f52cd0d5c1463439c9729a",
-    conductor: "65f5470fa52dda852ddbac51",
-    puntoinicio: {
-        latitud: 19.290192,
-        longitud: -99.224134
-        },
-    puntofinal: {
-        latitud: 19.304111101630596,
-        longitud: -99.19022479532426
-        },
-    comentarios:"prueba"
+    "pasajero": "65f52cd0d5c1463439c9729a",
+    "conductor": "65f5470fa52dda852ddbac51",
+    "puntoinicio": {
+        "latitud": 19.290192,
+        "longitud": -99.224134
+    },
+    "puntofinal": {
+        "latitud": 19.304111101630596,
+        "longitud": -99.19022479532426
+    },
+    "comentarios":"prueba"
 }
 ```
 
