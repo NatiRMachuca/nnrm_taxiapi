@@ -8,13 +8,7 @@ const crypto = require('crypto');
 const api=request(app)
 
 jest.mock("mongoose",()=>({
-    connect:()=>new Promise(()=>jest.fn(),()=>jest.fn()),
-/*    Schema:()=>(jest.fn()),
-    model:()=>({
-        create:{},
-        find:{},
-        findOne:{},
-    })*/
+    connect:()=>new Promise(()=>jest.fn(),()=>jest.fn())
 }))
 
 
@@ -53,14 +47,30 @@ describe('get /viajes',()=>{
                 _id:crypto.randomUUID(),
                 pasajero: "65f52cd0d5c1463439c9729a",
                 conductor: "65f5470fa52dda852ddbac51",
-                direccion: "Loma linda"
+                puntoinicio: {
+                    latitud: 19.290192,
+                    longitud: -99.224134
+                },
+                puntofinal: {
+                    latitud: 19.304111101630596,
+                    longitud: -99.19022479532426
+                },
+                comentarios:"prueba"
             
         },
         {
                 _id:crypto.randomUUID(),
                 pasajero: "65f52cd0d5c1463439c9729a",
                 conductor: "65f5470fa52dda852ddbac51",
-                direccion: "Loma Encantada"
+                puntoinicio: {
+                    latitud: 19.290192,
+                    longitud: -99.224134
+                },
+                puntofinal: {
+                    latitud: 19.304111101630596,
+                    longitud: -99.19022479532426
+                },
+                comentarios:"prueba"
             
         }])
         const response=await api.get("/viajes").send()
@@ -76,7 +86,15 @@ describe('post all',()=>{
         const data = {
             pasajero: "65f52cd0d5c1463439c9729a",
             conductor: "65f5470fa52dda852ddbac51",
-            direccion: "Loma linda"
+            puntoinicio: {
+                latitud: 19.290192,
+                longitud: -99.224134
+              },
+              puntofinal: {
+                latitud: 19.304111101630596,
+                longitud: -99.19022479532426
+              },
+            comentarios:"prueba"
         };
         const newViaje={
             _id:crypto.randomUUID(),
@@ -87,9 +105,9 @@ describe('post all',()=>{
         expect(response.body).toStrictEqual(newViaje);
     })
 
-    test("valida error creacion de viaje al mandar post sin data regresa un 400",async () =>{
+    test("valida error creacion de viaje al mandar post sin data regresa un 422",async () =>{
         const data = {};
-        const response=await api.post("/viajes").send(data).expect(400);
+        const response=await api.post("/viajes").send(data).expect(422);
     })
 })
 

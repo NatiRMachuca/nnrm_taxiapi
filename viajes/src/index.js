@@ -10,9 +10,6 @@ mongoose
   .then(() => console.log('MongoDB Connected - viajes'))
   .catch(err => console.log(err));
 
-
-
 const server=app.listen(appid, () => console.info(`${appid} is listening on ${appid}`));
 
-//module.exports=app;
 module.exports=server;

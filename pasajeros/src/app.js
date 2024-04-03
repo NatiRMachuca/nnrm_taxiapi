@@ -3,6 +3,6 @@ const app = express();
 const router = require('./routes');
 
 app.use(express.json());
-app.use('/conductores', router);
+app.use('/pasajeros', router);
 
 module.exports =app;

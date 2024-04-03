@@ -14,37 +14,33 @@ router.post('/', async (req, res) => {
 
     let data ={};
     let databus={};
+    const { pasajero,conductor,puntoinicio,puntofinal,comentarios}=req.body || {};
 
-    console.log(req.body,Object.keys(req.body).length);
-    if(Object.keys(req.body).length>0 && JSON.stringify(req.body) != "{}" &&
-        req.body.pasajero!=undefined && req.body.conductor!=undefined){
+    //console.log(req.body,Object.keys(req.body).length);
+    if(pasajero && conductor && puntoinicio && puntofinal && comentarios){
         data={
-            pasajero: req.body.pasajero,
-            conductor: req.body.conductor,
-            puntoinicio: req.body.puntoinicio,
-            puntofinal: req.body.puntofinal,
-            comentarios: req.body.comentarios,
+            pasajero,
+            conductor,
+            puntoinicio,
+            puntofinal,
+            comentarios,
             estatus: "Activo"
         }
 
-        databus={
-            id: req.body.conductor
-        }
-
-    }
-    try{ 
-        if(Object.keys(data).length>0){
+        databus={id: conductor}
+        try{ 
             const dataToSave = await Viaje.create(data);
             stan.publish('conductores:updateOcupado', JSON.stringify(databus), (err, guid) => {
                 if (err) console.log('post viaje : ERROR en la publicacion de msj : ' + err);
                 else console.log('post viaje: EXITO publico msj guid: ' + guid);
             });
             res.status(200).json(dataToSave)
-        }else{
-            res.status(400).json({message: "Invalid request"})
+        
+        }catch (error) {
+            res.status(400).json({message: error.message})
         }
-    }catch (error) {
-        res.status(400).json({message: error.message})
+    }else{
+        res.status(422).json({message: 'Invalid parameters'})
     }
 })
 

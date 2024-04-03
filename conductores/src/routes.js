@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const Conductor = require('./model');
 
-//const stan = require('./bus');
-
 router.get('/', async (req, res) => {
     const {estatus,latitud,longitud,radio}=req.query;
     const filtro={};
@@ -26,29 +24,31 @@ router.get('/', async (req, res) => {
 
 
 router.post('/', async (req, res) => {
-    console.log(req.body);
-    const { nombre, apellidos, sexo, celular, correo, longitud, latitud} = req.body
-    let data={
-        nombre,
-        apellidos,
-        sexo,
-        celular,
-        correo,
-        estatus: "Disponible",
-        ubicacion:{
-            type: "Point",
-            coordinates: [longitud,latitud]
+    console.log("body",req.body);
+    let data={};
+    const {nombre, apellidos, sexo, celular, correo, longitud, latitud} = req.body || {};
+    
+    if(nombre && apellidos && sexo && celular && correo && latitud && longitud) {
+        data={
+            nombre,
+            apellidos,
+            sexo,
+            celular,
+            correo,
+            estatus: "Disponible",
+            ubicacion:{
+                type: "Point",
+                coordinates: [longitud,latitud]
+            }
         }
-    }
-    try {
-        if(Object.keys(data).length>0){
+        try {
             const dataToSave = await Conductor.create(data);
             res.status(200).json(dataToSave);
-        }else{
-            es.status(400).json({message: "Invalid parameters"})
+        }catch (error) {
+            res.status(400).json({message: error.message})
         }
-    }catch (error) {
-        res.status(400).json({message: error.message})
+    }else{
+        res.status(422).json({message: "Invalid parameters"})
     }
 })
 

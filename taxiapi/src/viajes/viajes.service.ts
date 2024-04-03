@@ -39,7 +39,7 @@ export class ViajesService {
       if(existePasajero){
         //buscar los conductores mas cercanos
         const {latitud,longitud} =createViaje.puntoinicio;
-        const uriconductores=`${process.env.HOST}conductores?latitud=${latitud}&longitud=${longitud}&radio=1000`;
+        const uriconductores=`${process.env.HOST}conductores?latitud=${latitud}&longitud=${longitud}&radio=3000`;
         console.log(uriconductores);
         let idconductor="";
         try {
