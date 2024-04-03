@@ -208,16 +208,16 @@ Recibe un objeto JSON
 
 ```JSON
 {
-    pasajero: "65f52cd0d5c1463439c9729a",
-    puntoinicio: {
-        latitud: 19.290192,
-        longitud: -99.224134
+    "pasajero": "65f52cd0d5c1463439c9729a",
+    "puntoinicio": {
+        "latitud": 19.290192,
+        "longitud": -99.224134
         },
-    puntofinal: {
-        latitud: 19.304111101630596,
-        longitud: -99.19022479532426
+    "puntofinal": {
+        "latitud": 19.304111101630596,
+        "longitud": -99.19022479532426
         },
-    comentarios:"prueba"
+    "comentarios":"prueba"
 }
 ```
 
