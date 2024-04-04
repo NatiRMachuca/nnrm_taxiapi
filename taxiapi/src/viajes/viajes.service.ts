@@ -5,16 +5,7 @@ import {CrearViajeDto} from '../dto/create-viaje.dto'
 @Injectable()
 export class ViajesService {
 
-    async obtenerViajes() {
-        const uri = process.env.HOST+"viajes/";
-        console.log(process.env.url_conductores);
-        try {
-          const response = await axios.get(uri);
-          return response.data;
-        } catch (error) {
-          console.error(error);
-        }
-    }
+   
 
     async crearViaje(createViaje: CrearViajeDto){
       
@@ -78,19 +69,41 @@ export class ViajesService {
     }
 
     async completarViaje(id: string){
-      const uri = `${process.env.HOST}viajes/${id}`;
-      console.log("completar viaje",uri);
+
+      const uriviajeid = process.env.HOST+"viajes/"+id;
+      console.log("consultar viaje: ",uriviajeid);
+      let viajecompletadoanteriormente=false;
+
       try {
-        const response = await axios.put(uri);
-        if(response.status === 200){
-          return response.data;
-        }else{
-          throw new NotFoundException('No encontro viaje');
+        const response = await axios.get(uriviajeid);
+        if(response.status === 200) {
+          console.log(response.data);
+            if(response.data.estatus!=undefined && response.data.estatus=="Completado")
+            viajecompletadoanteriormente=true;
         }
+          
       } catch (error) {
-        //console.error(error);
-        throw new NotFoundException('Ocurrio un error de viaje');
+        console.error("ocurrio un error al consultar pasajero");
+        throw new NotFoundException('No se pudede completar el viaje'); 
       }
+      if(!viajecompletadoanteriormente){
+        const uri = `${process.env.HOST}viajes/${id}`;
+        console.log("completar viaje",uri);
+        try {
+          const response = await axios.put(uri);
+          if(response.status === 200){
+            return response.data;
+          }else{
+            throw new NotFoundException('No encontro viaje');
+          }
+        } catch (error) {
+          console.error(error);
+          throw new NotFoundException('Ocurrio un error de viaje');
+        }
+      }else{
+        throw new NotFoundException('No se pudede completar el viaje');
+      }
+
     }
 
 }

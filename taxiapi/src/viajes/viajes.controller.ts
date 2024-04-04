@@ -9,19 +9,11 @@ export class ViajesController {
 
     constructor(private viajesService: ViajesService){}
 
-    @Get()
-    findAll(){
-        return this.viajesService.obtenerViajes();
-    }
-
     @Post()
     async create(@Body() body:CrearViajeDto){
         try {
             return await this.viajesService.crearViaje(body);
         } catch (error) {
-           /* if(error===11000){
-                throw new ConflictException(' already exists');
-            }*/
             throw error;
             
         }
